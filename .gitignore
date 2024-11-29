@@ -1,0 +1,5 @@
+*.pgm
+.DS_Store
+.ipynb_checkpoints/
+Untitled*.ipynb
+__pycache__

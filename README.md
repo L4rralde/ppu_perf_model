@@ -1,1 +1,1 @@
-# Perceptro Processing Unit (PPU) Performance Model
+# Perceptron Processing Unit (PPU) Performance Model
