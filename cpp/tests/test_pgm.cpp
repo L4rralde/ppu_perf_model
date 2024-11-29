@@ -6,7 +6,8 @@ using namespace std;
 int main(int argc, char **argv){
     for(int i = 1; i < argc; ++i){
         string path(argv[i]);
-        print(read_pgm(path));
+        Pgm temp(path);
+        print(temp);
     }
     return 0;
 }
