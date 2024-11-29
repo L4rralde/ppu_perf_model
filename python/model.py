@@ -68,6 +68,7 @@ def test(dataloader, model, loss_fn):
     correct /= size
     print("Test Error")
     print(f"Accuracy: {(100*correct)}, Avg loss: {test_loss}")
+    return correct, test_loss
 
 
 def initialize_weights(m):
@@ -103,7 +104,16 @@ def main():
     for t in range(epochs):
         print(f"Epoch {t+1}")
         train(train_dataloader, model, loss_fn, optimizer)
-        test(test_dataloader, model, loss_fn)
+        accuracy, test_loss = test(test_dataloader, model, loss_fn)
+        
+        # Early stopping based on test loss
+        if accuracy > 0.85 and test_loss < 2.0:
+            model_path = f"{GIT_ROOT}/models/{accuracy}_{test_loss}.pth"
+            print("Saving model")
+            torch.save(model.state_dict(), model_path)
+        if test_loss > 5.0:
+            break
+
     print("Done!")
 
 if __name__ == '__main__':
