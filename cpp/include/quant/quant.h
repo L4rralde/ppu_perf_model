@@ -7,6 +7,7 @@ class Dtype{
 private:
     float _num;
 public:
+    static float min, max;
     Dtype(float x);
     Dtype(const Dtype& other);
     Dtype operator+(Dtype&& other);

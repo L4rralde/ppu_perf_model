@@ -2,10 +2,18 @@
 #include <iostream>
 
 Dtype::Dtype(float num){
+    if(num > Dtype::max)
+        Dtype::max = num;
+    if(num < Dtype::min)
+        Dtype::min = num;
     _num = num;
 }
 
 Dtype::Dtype(const Dtype& other){
+    if(other._num > Dtype::max)
+        Dtype::max = other._num;
+    if(other._num < Dtype::min)
+        Dtype::min = other._num;
     _num = other._num;
 }
 
