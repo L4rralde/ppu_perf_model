@@ -34,6 +34,10 @@ void Dtype::print(){
     std::cout << _num << std::endl;
 }
 
+void Dtype::print_inline(){
+    std::cout << _num;
+}
+
 Dtype quantisize(float x){
     return Dtype(x);
 }
@@ -48,4 +52,13 @@ vec quantisize(std::vector<float>& x){
 
 void print(Dtype&& num){
     num.print();
+}
+
+void print(vec& v){
+    int len = v.size();
+    for(int i = 0; i < len; ++i){
+        v[i].print_inline();
+        std::cout << " ";
+    }
+    std::cout << std::endl;
 }
