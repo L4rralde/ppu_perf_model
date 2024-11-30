@@ -26,8 +26,7 @@ int main(int argc, char **argv){
         vec quantisized = quantisize(transformed);
 
         vec prediction = model.forward(quantisized);
-        bool stenosis = prediction[1] > prediction[0];
-        cout << static_cast<int>(stenosis) << endl;
+        cout << argmax(prediction) << endl;
     }
     return 0;
 }

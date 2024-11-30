@@ -41,5 +41,6 @@ public:
 
 std::vector< std::vector<float> > read_weights_vector(std::string& filename);
 
+int argmax(vec& output);
 
 #endif

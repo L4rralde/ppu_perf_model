@@ -34,6 +34,14 @@ bool Dtype::operator==(Dtype& other){
     return _num == other._num;
 }
 
+Dtype& Dtype::operator=(Dtype&& other){
+    // Guard self assignment
+    if (this == &other)
+        return *this;
+    _num = other._num;
+    return *this;
+}
+
 void Dtype::print(){
     std::cout << _num << std::endl;
 }

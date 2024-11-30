@@ -116,3 +116,16 @@ std::vector<std::vector<float>> read_weights_vector(std::string& filename){
     file.close();
     return data;
 }
+
+int argmax(vec& output){
+    Dtype max(output[0]);
+    int max_i = 0;
+    int len = output.size();
+    for(int i = 1; i < len; ++i){
+        if(output[i] > max){
+            max_i = i;
+            max = Dtype(output[i]);
+        }
+    }
+    return max_i;
+}

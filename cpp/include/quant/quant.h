@@ -15,6 +15,7 @@ public:
     bool operator<(Dtype& other);
     bool operator>(Dtype& other);
     bool operator==(Dtype& other);
+    Dtype& operator=(Dtype&& other);
     void print();
     void print_inline();
 };
