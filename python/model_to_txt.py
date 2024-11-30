@@ -21,7 +21,8 @@ class Translator:
         keys = list(self.keys)
         keys.sort()
         for i, key in enumerate(keys):
-            np.savetxt(f"{path}/{i}.txt", self.__getitem__(key))
+            data = self.__getitem__(key)
+            np.savetxt(f"{path}/{i}.txt", data, comments='')
 
 
 def main():

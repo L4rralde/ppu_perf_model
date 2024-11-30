@@ -9,7 +9,7 @@ Dtype::Dtype(const Dtype& other){
     _num = other._num;
 }
 
-Dtype Dtype::operator+(Dtype& other){
+Dtype Dtype::operator+(Dtype&& other){
     return Dtype(_num + other._num);
 }
 

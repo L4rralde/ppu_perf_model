@@ -9,7 +9,7 @@ private:
 public:
     Dtype(float x);
     Dtype(const Dtype& other);
-    Dtype operator+(Dtype& other);
+    Dtype operator+(Dtype&& other);
     Dtype& operator+=(Dtype&& other);
     Dtype operator*(Dtype& other);
     bool operator<(Dtype&& other);
