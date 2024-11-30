@@ -26,7 +26,7 @@ Dtype Neuron::forward(vec& x){
     Dtype acc(0);
     for(int i = 0; i < len; ++i)
         acc += _ws[i] * x[i];
-    return acc + Dtype(1);
+    return acc + Dtype(_ws[len]);
 }
 
 Layer::Layer(std::vector<std::vector<float>>& ws){
