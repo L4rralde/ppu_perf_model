@@ -7,7 +7,8 @@
 #include <dirent.h>
 
 Dtype ReLU(Dtype&& num){
-    if(num < Dtype(0))
+    Dtype zero(0);
+    if(num < zero)
         return Dtype(0);
     return Dtype(num);
 }
@@ -29,6 +30,7 @@ Dtype Neuron::forward(vec& x){
 }
 
 Layer::Layer(std::vector<std::vector<float>>& ws){
+    _is_output_layer = false;
     _len = ws.size();
     for(int i = 0; i < _len; ++i)
         _neurons.push_back(Neuron(ws[i]));
@@ -36,11 +38,18 @@ Layer::Layer(std::vector<std::vector<float>>& ws){
 
 vec Layer::forward(vec& x){
     vec output;
-    for(int i = 0; i < _len; ++i)
-        output.push_back(
-            ReLU(_neurons[i].forward(x))
-        );
+    for(int i = 0; i < _len; ++i){
+        if(_is_output_layer){
+            output.push_back(_neurons[i].forward(x));
+        }else{
+            output.push_back(ReLU(_neurons[i].forward(x)));
+        }
+    }
     return output;
+}
+
+void Layer::as_output_layer(){
+    _is_output_layer = true;
 }
 
 std::vector<std::string> get_model_files(std::string& fpath){
@@ -64,6 +73,7 @@ std::vector<std::string> get_model_files(std::string& fpath){
 }
 
 Perceptron::Perceptron(std::string& fpath): _depth(0){
+    std::cout << "Loading weights for inferecne." << std::endl;
     std::vector<std::vector<std::vector<float>>> weights;
     
     std::vector<std::string> model_files = get_model_files(fpath);
@@ -73,6 +83,7 @@ Perceptron::Perceptron(std::string& fpath): _depth(0){
         _layers.push_back(Layer(layer_ws));
         _depth++;
     }
+    _layers[nlayers - 1].as_output_layer();
 }
 
 vec Perceptron::forward(vec& x){
@@ -83,7 +94,6 @@ vec Perceptron::forward(vec& x){
 
 
 std::vector<std::vector<float>> read_weights_vector(std::string& filename){
-    std::cout << "Openning " << filename << std::endl;
     std::vector<std::vector<float>> data;
     std::ifstream file(filename);
 

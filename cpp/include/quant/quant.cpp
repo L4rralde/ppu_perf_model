@@ -22,11 +22,15 @@ Dtype  Dtype::operator*(Dtype& other){
     return Dtype(_num * other._num);
 }
 
-bool Dtype::operator<(Dtype&& other){
+bool Dtype::operator<(Dtype& other){
     return _num < other._num;
 }
 
-bool Dtype::operator==(Dtype&& other){
+bool Dtype::operator>(Dtype& other){
+    return _num > other._num;
+}
+
+bool Dtype::operator==(Dtype& other){
     return _num == other._num;
 }
 

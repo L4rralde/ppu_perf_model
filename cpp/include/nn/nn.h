@@ -6,7 +6,7 @@
 #include "../quant/quant.h"
 
 
-Dtype ReLU(Dtype& num);
+Dtype ReLU(Dtype&& num);
 
 
 class Neuron{
@@ -23,9 +23,11 @@ class Layer{
 private:
     std::vector<Neuron> _neurons;
     int _len;
+    bool _is_output_layer;
 public:
     Layer(std::vector<std::vector<float>>& ws);
     vec forward(vec &x);
+    void as_output_layer();
 };
 
 class Perceptron{

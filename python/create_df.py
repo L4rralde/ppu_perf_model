@@ -6,7 +6,7 @@ from utils import GIT_ROOT
 
 
 def main() -> None:
-    imgs_path = glob.glob(f"{GIT_ROOT}/data/pgm/*.pgm")
+    imgs_path = sorted(glob.glob(f"{GIT_ROOT}/data/pgm/*.pgm"))
     data = {
         "image_name": [os.path.basename(fpath) for fpath in imgs_path],
         "Stenosis": [int("Positive" in fpath) for fpath in imgs_path] 
