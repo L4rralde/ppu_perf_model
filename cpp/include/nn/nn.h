@@ -6,7 +6,7 @@
 #include "../quant/quant.h"
 #include "../int8/int8.h"
 
-
+Int8 ReLU(Int8& num);
 Int8 ReLU(Int8&& num);
 
 

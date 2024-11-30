@@ -28,6 +28,7 @@ public:
 
 typedef std::vector<Int8> int8_vec;
 
+void print(Int8& num);
 void print(Int8&& num);
 
 #endif
