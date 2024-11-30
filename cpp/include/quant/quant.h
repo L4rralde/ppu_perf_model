@@ -8,6 +8,7 @@ private:
     float _num;
 public:
     static float min, max;
+    Dtype();
     Dtype(float x);
     Dtype(const Dtype& other);
     Dtype operator+(Dtype&& other);
@@ -19,6 +20,7 @@ public:
     Dtype& operator=(Dtype&& other);
     void print();
     void print_inline();
+    std::string str();
 };
 
 typedef std::vector<Dtype> vec;

@@ -1,6 +1,8 @@
 #include "quant.h"
 #include <iostream>
 
+Dtype::Dtype(): _num(0) {}
+
 Dtype::Dtype(float num){
     if(num > Dtype::max)
         Dtype::max = num;
@@ -51,11 +53,15 @@ Dtype& Dtype::operator=(Dtype&& other){
 }
 
 void Dtype::print(){
-    std::cout << _num << std::endl;
+    std::cout << str() << std::endl;
 }
 
 void Dtype::print_inline(){
-    std::cout << _num;
+    std::cout << str();
+}
+
+std::string Dtype::str(){
+    return std::to_string(_num);
 }
 
 Dtype quantisize(float x){
