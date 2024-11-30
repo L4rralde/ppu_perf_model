@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "../include/pgm/pgm.h"
-#include "../include/quant/quant.h"
+#include "../include/int8/int8.h"
 #include "../include/nn/nn.h"
 
 using namespace std;
@@ -26,9 +26,9 @@ int main(int argc, char **argv){
         Pgm img(fpath);
 
         vector<float> transformed = img.get_transformed();
-        vec quantisized = quantisize(transformed);
+        int8_vec quantisized = Int8::quantisize(transformed);
 
-        vec prediction = model.forward(quantisized);
+        int8_vec prediction = model.forward(quantisized);
         cout << argmax(prediction) << endl;
     }
 
