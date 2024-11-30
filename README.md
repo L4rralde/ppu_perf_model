@@ -2,5 +2,6 @@
 
 TODO:
 - [X] Build and train model
-- [] develop MLP in C++:
-    - [] Save weights in text files
+- [x] develop MLP in C++.
+- [ ] Quantization
+- [ ] Testing
