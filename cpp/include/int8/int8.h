@@ -15,10 +15,15 @@ public:
     Int8(float x);
     Int8 operator+(Int8&& other);
     Int8 operator+(Int8& other);
+    Int8& operator+=(Int8&& other);
     Int8 operator*(Int8&& other);
     Int8 operator*(Int8& other);
+    bool operator<(Int8& other);
+    bool operator>(Int8& other);
     std::string str();
     void print();
+    static Int8 quantisize(float x);
+    static std::vector<Int8> quantisize(std::vector<float>& x);
 };
 
 typedef std::vector<Int8> int8_vec;

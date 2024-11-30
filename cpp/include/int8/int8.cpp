@@ -68,6 +68,19 @@ Int8 Int8::operator*(Int8&& other){
     return quant;
 }
 
+Int8& Int8::operator+=(Int8&& other){
+    _num = static_cast<int8_t>(sum(_num, other._num));
+    return *this;
+}
+
+bool Int8::operator<(Int8& other){
+    return _num < other._num;
+}
+
+bool Int8::operator>(Int8& other){
+    return _num > other._num;
+}
+
 std::string Int8::str(){
     float x = static_cast<float>(_num);
     x /= (1 << INT8_NUM_DEC_BITS);
@@ -78,6 +91,20 @@ void Int8::print(){
     std::cout << str() << std::endl;
 }
 
+Int8 Int8::quantisize(float x){
+    return Int8(x);
+}
+
+int8_vec Int8::quantisize(std::vector<float>& x){
+    int8_vec quantisized;
+    int len = x.size();
+    for(int i = 0; i < len; ++i)
+        quantisized.push_back(Int8(x[i]));
+    return quantisized;
+}
+
+
 void print(Int8&& num){
     num.print();
 }
+

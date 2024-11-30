@@ -6,27 +6,27 @@
 #include <regex>
 #include <dirent.h>
 
-Dtype ReLU(Dtype&& num){
-    Dtype zero(0);
+Int8 ReLU(Int8&& num){
+    Int8 zero(0);
     if(num < zero)
-        return Dtype(0);
-    return Dtype(num);
+        return Int8(0);
+    return Int8(num);
 }
 
 Neuron::Neuron(std::vector<float>& ws){
     _len = ws.size();
     for(int i = 0; i < _len; ++i)
-        _ws.push_back(Dtype(ws[i]));
+        _ws.push_back(Int8(ws[i]));
 }
 
-Dtype Neuron::forward(vec& x){
+Int8 Neuron::forward(int8_vec& x){
     int len = x.size();
     if(len + 1 != _len)
         throw std::invalid_argument("Len mismatch");
-    Dtype acc(0);
+    Int8 acc(0);
     for(int i = 0; i < len; ++i)
         acc += _ws[i] * x[i];
-    return acc + Dtype(_ws[len]);
+    return acc + Int8(_ws[len]);
 }
 
 Layer::Layer(std::vector<std::vector<float>>& ws){
@@ -36,8 +36,8 @@ Layer::Layer(std::vector<std::vector<float>>& ws){
         _neurons.push_back(Neuron(ws[i]));
 }
 
-vec Layer::forward(vec& x){
-    vec output;
+int8_vec Layer::forward(int8_vec& x){
+    int8_vec output;
     for(int i = 0; i < _len; ++i){
         if(_is_output_layer){
             output.push_back(_neurons[i].forward(x));
@@ -73,7 +73,7 @@ std::vector<std::string> get_model_files(std::string& fpath){
 }
 
 Perceptron::Perceptron(std::string& fpath): _depth(0){
-    std::cout << "Loading weights for inferecne." << std::endl;
+    std::cout << "Loading weights for inference." << std::endl;
     std::vector<std::vector<std::vector<float>>> weights;
     
     std::vector<std::string> model_files = get_model_files(fpath);
@@ -86,7 +86,7 @@ Perceptron::Perceptron(std::string& fpath): _depth(0){
     _layers[nlayers - 1].as_output_layer();
 }
 
-vec Perceptron::forward(vec& x){
+int8_vec Perceptron::forward(int8_vec& x){
     for(int i = 0; i < _depth; ++i)
         x = _layers[i].forward(x);
     return x;
@@ -117,14 +117,14 @@ std::vector<std::vector<float>> read_weights_vector(std::string& filename){
     return data;
 }
 
-int argmax(vec& output){
-    Dtype max(output[0]);
+int argmax(int8_vec& output){
+    Int8 max(output[0]);
     int max_i = 0;
     int len = output.size();
     for(int i = 1; i < len; ++i){
         if(output[i] > max){
             max_i = i;
-            max = Dtype(output[i]);
+            max = Int8(output[i]);
         }
     }
     return max_i;

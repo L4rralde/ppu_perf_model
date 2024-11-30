@@ -4,18 +4,19 @@
 #include <vector>
 #include <string>
 #include "../quant/quant.h"
+#include "../int8/int8.h"
 
 
-Dtype ReLU(Dtype&& num);
+Int8 ReLU(Int8&& num);
 
 
 class Neuron{
 private:
-    vec _ws;
+    int8_vec _ws;
     int _len;
 public:
     Neuron(std::vector<float>& ws);
-    Dtype forward(vec& x);
+    Int8 forward(int8_vec& x);
 };
 
 
@@ -26,7 +27,7 @@ private:
     bool _is_output_layer;
 public:
     Layer(std::vector<std::vector<float>>& ws);
-    vec forward(vec &x);
+    int8_vec forward(int8_vec &x);
     void as_output_layer();
 };
 
@@ -36,11 +37,11 @@ private:
     int _depth;
 public:
     Perceptron(std::string& fpath);
-    vec forward(vec& x);
+    int8_vec forward(int8_vec& x);
 };
 
 std::vector< std::vector<float> > read_weights_vector(std::string& filename);
 
-int argmax(vec& output);
+int argmax(int8_vec& output);
 
 #endif
