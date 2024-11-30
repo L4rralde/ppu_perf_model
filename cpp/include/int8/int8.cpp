@@ -103,6 +103,9 @@ int8_vec Int8::quantisize(std::vector<float>& x){
     return quantisized;
 }
 
+void print(Int8& num){
+    num.print();
+}
 
 void print(Int8&& num){
     num.print();

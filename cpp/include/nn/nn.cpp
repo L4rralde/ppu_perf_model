@@ -6,6 +6,13 @@
 #include <regex>
 #include <dirent.h>
 
+Int8 ReLU(Int8 &num){
+    Int8 zero(0);
+    if(num < zero)
+        return Int8(0);
+    return Int8(num);
+}
+
 Int8 ReLU(Int8&& num){
     Int8 zero(0);
     if(num < zero)
@@ -91,7 +98,6 @@ int8_vec Perceptron::forward(int8_vec& x){
         x = _layers[i].forward(x);
     return x;
 }
-
 
 std::vector<std::vector<float>> read_weights_vector(std::string& filename){
     std::vector<std::vector<float>> data;
