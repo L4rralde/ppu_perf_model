@@ -26,6 +26,7 @@ public:
     Float16 operator*(Float16&& other);
     Float16& operator+=(Float16&& other);
     Float16& operator=(Float16& other);
+    Float16& operator=(Float16&& other);
 
     float stdfloat();
     void print();

@@ -142,6 +142,13 @@ Float16& Float16::operator=(Float16& other){
     return *this;
 }
 
+Float16& Float16::operator=(Float16&& other){
+    _sign = other._sign;
+    _exp = other._exp;
+    _mantissa = other._mantissa;
+    return *this;
+}
+
 void Float16::print(){
     std::cout << std::setprecision(10) << stdfloat() << std::endl;
 }
