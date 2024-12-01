@@ -79,6 +79,7 @@ Perceptron::Perceptron(std::string& fpath): _depth(0){
     std::vector<std::string> model_files = get_model_files(fpath);
     int nlayers = model_files.size();
     for(int i = 0; i < nlayers; ++i){
+        std::cout << "Loading layer " << i+1 << "/" << nlayers << std::endl;
         std::vector<std::vector<float>> layer_ws = read_weights_vector(model_files[i]);
         _layers.push_back(Layer(layer_ws));
         _depth++;
