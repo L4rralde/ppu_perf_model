@@ -4,18 +4,18 @@
 #include <vector>
 #include <string>
 #include "../quant/quant.h"
+#include "../float16/float16.h"
 
-
-Dtype ReLU(Dtype&& num);
+Float16 ReLU(Float16&& num);
 
 
 class Neuron{
 private:
-    vec _ws;
+    float16_vec _ws;
     int _len;
 public:
     Neuron(std::vector<float>& ws);
-    Dtype forward(vec& x);
+    Float16 forward(float16_vec& x);
 };
 
 
@@ -26,7 +26,7 @@ private:
     bool _is_output_layer;
 public:
     Layer(std::vector<std::vector<float>>& ws);
-    vec forward(vec &x);
+    float16_vec forward(float16_vec &x);
     void as_output_layer();
 };
 
@@ -36,11 +36,11 @@ private:
     int _depth;
 public:
     Perceptron(std::string& fpath);
-    vec forward(vec& x);
+    float16_vec forward(float16_vec& x);
 };
 
 std::vector< std::vector<float> > read_weights_vector(std::string& filename);
 
-int argmax(vec& output);
+int argmax(float16_vec& output);
 
 #endif

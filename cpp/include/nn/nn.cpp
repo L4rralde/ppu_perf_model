@@ -6,27 +6,27 @@
 #include <regex>
 #include <dirent.h>
 
-Dtype ReLU(Dtype&& num){
-    Dtype zero(0);
+Float16 ReLU(Float16&& num){
+    Float16 zero(0);
     if(num < zero)
-        return Dtype(0);
-    return Dtype(num);
+        return Float16(0);
+    return Float16(num);
 }
 
 Neuron::Neuron(std::vector<float>& ws){
     _len = ws.size();
     for(int i = 0; i < _len; ++i)
-        _ws.push_back(Dtype(ws[i]));
+        _ws.push_back(Float16(ws[i]));
 }
 
-Dtype Neuron::forward(vec& x){
+Float16 Neuron::forward(float16_vec& x){
     int len = x.size();
     if(len + 1 != _len)
         throw std::invalid_argument("Len mismatch");
-    Dtype acc(0);
+    Float16 acc(0);
     for(int i = 0; i < len; ++i)
         acc += _ws[i] * x[i];
-    return acc + Dtype(_ws[len]);
+    return acc + Float16(_ws[len]);
 }
 
 Layer::Layer(std::vector<std::vector<float>>& ws){
@@ -36,8 +36,8 @@ Layer::Layer(std::vector<std::vector<float>>& ws){
         _neurons.push_back(Neuron(ws[i]));
 }
 
-vec Layer::forward(vec& x){
-    vec output;
+float16_vec Layer::forward(float16_vec& x){
+    float16_vec output;
     for(int i = 0; i < _len; ++i){
         if(_is_output_layer){
             output.push_back(_neurons[i].forward(x));
@@ -86,7 +86,7 @@ Perceptron::Perceptron(std::string& fpath): _depth(0){
     _layers[nlayers - 1].as_output_layer();
 }
 
-vec Perceptron::forward(vec& x){
+float16_vec Perceptron::forward(float16_vec& x){
     for(int i = 0; i < _depth; ++i)
         x = _layers[i].forward(x);
     return x;
@@ -117,14 +117,14 @@ std::vector<std::vector<float>> read_weights_vector(std::string& filename){
     return data;
 }
 
-int argmax(vec& output){
-    Dtype max(output[0]);
+int argmax(float16_vec& output){
+    Float16 max(output[0]);
     int max_i = 0;
     int len = output.size();
     for(int i = 1; i < len; ++i){
         if(output[i] > max){
             max_i = i;
-            max = Dtype(output[i]);
+            max = Float16(output[i]);
         }
     }
     return max_i;

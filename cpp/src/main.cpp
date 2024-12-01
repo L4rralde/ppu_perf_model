@@ -26,12 +26,11 @@ int main(int argc, char **argv){
         Pgm img(fpath);
 
         vector<float> transformed = img.get_transformed();
-        vec quantisized = quantisize(transformed);
+        float16_vec quantisized = Float16::quantisize(transformed);
 
-        vec prediction = model.forward(quantisized);
+        float16_vec prediction = model.forward(quantisized);
         cout << argmax(prediction) << endl;
     }
 
-    cout << Dtype::min << ", " << Dtype::max << endl;
     return 0;
 }
