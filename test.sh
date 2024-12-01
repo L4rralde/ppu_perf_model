@@ -1,0 +1,1 @@
+$GIT_ROOT/cpp/output/test_main.o $GIT_ROOT/data/pgm/*.pgm
