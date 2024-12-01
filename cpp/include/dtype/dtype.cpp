@@ -52,16 +52,16 @@ void Dtype::print_inline(){
     std::cout << _num;
 }
 
-Dtype quantisize(float x){
+Dtype asdtype(float x){
     return Dtype(x);
 }
 
-vec quantisize(std::vector<float>& x){
-    vec quantisized;
+vec asdtype(std::vector<float>& x){
+    vec dtyped;
     int len = x.size();
     for(int i = 0; i < len; ++i)
-        quantisized.push_back(Dtype(x[i]));
-    return quantisized;
+        dtyped.push_back(Dtype(x[i]));
+    return dtyped;
 }
 
 void print(Dtype&& num){

@@ -25,9 +25,9 @@ int main(int argc, char **argv){
         Pgm img(fpath);
 
         vector<float> transformed = img.get_transformed();
-        vec quantisized = quantisize(transformed);
+        vec dtyped = asdtype(transformed);
 
-        vec prediction = model.forward(quantisized);
+        vec prediction = model.forward(dtyped);
         int stenosis_hat = argmax(prediction);
         int stenosis;
         if(fpath.find("Positive") != std::string::npos){
@@ -42,8 +42,10 @@ int main(int argc, char **argv){
 
     float accuracy = hits/(argc - 1.0);
     cout << "Accuracy:" << accuracy << endl;
-    if(accuracy < 0.95)
+    if(accuracy < 0.95){
         throw runtime_error("ERROR. Drop of accuracy");
-
+    }else{
+        cout << "PASS" << endl;
+    }
     return 0;
 }

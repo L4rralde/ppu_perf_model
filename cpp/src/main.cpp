@@ -23,9 +23,9 @@ int main(int argc, char **argv){
         Pgm img(fpath);
 
         vector<float> transformed = img.get_transformed();
-        vec quantisized = quantisize(transformed);
+        vec dtyped = asdtype(transformed);
 
-        vec prediction = model.forward(quantisized);
+        vec prediction = model.forward(dtyped);
         cout << argmax(prediction) << endl;
     }
     return 0;

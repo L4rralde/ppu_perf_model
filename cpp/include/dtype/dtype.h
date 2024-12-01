@@ -24,8 +24,8 @@ public:
 typedef std::vector<Dtype> vec;
 
 
-Dtype quantisize(float x);
-vec quantisize(std::vector<float>& x);
+Dtype asdtype(float x);
+vec asdtype(std::vector<float>& x);
 
 void print(Dtype&& num);
 void print(vec& v);

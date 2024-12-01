@@ -14,8 +14,8 @@ int main(int argc, char **argv){
         string path(argv[i]);
         Pgm img(path);
         vector<float> transformed = img.get_transformed();
-        vec quantisized = quantisize(transformed);
-        print(quantisized);
+        vec dtyped = asdtype(transformed);
+        print(dtyped);
     }
     return 0;
 }
