@@ -6,9 +6,6 @@
 
 using namespace std;
 
-float Dtype::min = 0;
-float Dtype::max = 0;
-
 int main(int argc, char **argv){
     if(argc < 2)
         return 0;
@@ -31,7 +28,5 @@ int main(int argc, char **argv){
         vec prediction = model.forward(quantisized);
         cout << argmax(prediction) << endl;
     }
-
-    cout << Dtype::min << ", " << Dtype::max << endl;
     return 0;
 }
