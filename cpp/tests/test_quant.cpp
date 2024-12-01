@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "../include/pgm/pgm.h"
-#include "../include/quant/quant.h"
+#include "../include/dtype/dtype.h"
 
 
 using namespace std;

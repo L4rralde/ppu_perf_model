@@ -1,5 +1,5 @@
-#ifndef QUANT_H
-#define QUANT_H
+#ifndef DTYPE_H
+#define DTYPE_H
 
 #include <vector>
 

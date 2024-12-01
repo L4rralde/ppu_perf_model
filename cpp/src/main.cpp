@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "../include/pgm/pgm.h"
-#include "../include/quant/quant.h"
+#include "../include/dtype/dtype.h"
 #include "../include/nn/nn.h"
 
 using namespace std;

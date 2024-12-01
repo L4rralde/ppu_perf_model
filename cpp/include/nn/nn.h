@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string>
-#include "../quant/quant.h"
+#include "../dtype/dtype.h"
 
 
 Dtype ReLU(Dtype&& num);

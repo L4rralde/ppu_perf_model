@@ -1,4 +1,4 @@
-#include "quant.h"
+#include "dtype.h"
 #include <iostream>
 
 Dtype::Dtype(): _num(0) {}
