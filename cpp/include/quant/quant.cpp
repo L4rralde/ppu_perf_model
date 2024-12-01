@@ -1,6 +1,8 @@
 #include "quant.h"
 #include <iostream>
 
+Dtype::Dtype(): _num(0) {}
+
 Dtype::Dtype(float num){
     _num = num;
 }
