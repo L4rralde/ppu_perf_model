@@ -30,11 +30,10 @@ Int8 Neuron::forward(int8_vec& x){
     int len = x.size();
     if(len + 1 != _len)
         throw std::invalid_argument("Len mismatch");
-    Int8Acc acc;
+    Int8 acc(0);
     for(int i = 0; i < len; ++i)
         acc += _ws[i] * x[i];
-    acc += Int8(_ws[len]);
-    return acc.to_int8();
+    return acc + Int8(_ws[len]);
 }
 
 Layer::Layer(std::vector<std::vector<float>>& ws){

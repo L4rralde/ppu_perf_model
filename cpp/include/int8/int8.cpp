@@ -1,8 +1,6 @@
 #include "int8.h"
 #include <iostream>
 
-Int8::Int8(): _num(0) {}
-
 Int8::Int8(float x){
     x *= 1 << INT8_NUM_DEC_BITS;
     if(x > MAX_INT8)
@@ -113,13 +111,3 @@ void print(Int8&& num){
     num.print();
 }
 
-Int8Acc::Int8Acc(): _acc(0) {}
-
-Int8Acc& Int8Acc::operator+=(Int8&& other){
-    _acc = _acc + static_cast<int>(other._num);
-    return *this;
-}
-
-Int8 Int8Acc::to_int8(){
-    return Int8(static_cast<float>(_acc));
-}
