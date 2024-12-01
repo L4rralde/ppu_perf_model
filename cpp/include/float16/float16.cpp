@@ -39,6 +39,40 @@ Float16::Float16(Float16& other){
     _mantissa = other._mantissa;
 }
 
+int Float16::compare(Float16& a, Float16& b){
+    if(a._sign && !b._sign)
+        return -1;
+    if(!a._sign && b._sign)
+        return 1;
+    //Same signs
+    int32_t bits_a = (a._exp << 10) | a._mantissa;
+    int32_t bits_b = (b._exp << 10) | b._mantissa;
+    if(bits_a == bits_b)
+        return 0; //Equals
+    if(!a._sign){
+        //Both positive numbers
+        if(bits_a < bits_b)
+            return -1;
+        return 1;
+    }
+    //Both negative numbers
+    if(bits_a < bits_b)
+        return 1;
+    return -1;
+}
+
+bool Float16::operator<(Float16& other){
+    return compare(*this, other) == -1;
+}
+
+bool Float16::operator>(Float16& other){
+    return compare(*this, other) == 1;
+}
+
+bool Float16::operator==(Float16& other){
+    return compare(*this, other) == 0;
+}
+
 float Float16::stdfloat(){
     if(_exp == 0 && _mantissa == 0)
         return 0;
