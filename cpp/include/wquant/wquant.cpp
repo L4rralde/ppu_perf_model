@@ -1,6 +1,15 @@
 #include "wquant.h"
 #include <algorithm>
 #include <iostream>
+#include <sstream>
+
+template <typename T>
+std::string to_string2(const T a_value, const int n = 20){
+    std::ostringstream out;
+    out.precision(n);
+    out << std::fixed << a_value;
+    return std::move(out).str();
+}
 
 void get_constants(
     float fmin, float fmax, int qmin, int qmax, float *s, float *z
@@ -77,6 +86,20 @@ std::vector<int> Quantizer::quantize(std::vector<float>& x){
     return xq;
 }
 
+std::vector< std::vector<int> > Quantizer::quantize(
+        std::vector< std::vector<float> >& x
+){
+    int rows = x.size();
+    int cols = x[0].size();
+    std::vector< std::vector<int> > xq(
+        rows, std::vector<int>(cols, 0)
+    );
+    for(int i = 0; i < rows; ++i)
+        for(int j = 0; j < cols; ++j)
+            xq[i][j] = quantize(x[i][j]);
+    return xq;
+}
+
 
 float Quantizer::dequantize(int xq){
     return _s * (xq - _z);
@@ -90,10 +113,24 @@ std::vector<float> Quantizer::dequantize(std::vector<int>& xq){
     return x;
 }
 
+std::vector< std::vector<float> > Quantizer::dequantize(
+        std::vector< std::vector<int> >& xq
+){
+    int rows = xq.size();
+    int cols = xq[0].size();
+    std::vector< std::vector<float> > x(
+        rows, std::vector<float> (cols, 0.0)
+    );
+    for(int i = 0; i < rows; ++i)
+        for(int j = 0; j < cols; ++j)
+            x[i][j] = dequantize(xq[i][j]);
+    return x;
+}
+
 std::string Quantizer::str(){
-    return "Quantizer(size = " + std::to_string(_size) +
-            ", s = " + std::to_string(_s) +
-            ", z = " + std::to_string(_z) + ")";
+    return "Quantizer(" + to_string2(_size) +
+            ", " + to_string2(_fmin) +
+            ", " + to_string2(_fmax) + ")";
 }
 
 void Quantizer::print(){

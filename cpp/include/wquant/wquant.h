@@ -19,8 +19,14 @@ public:
     Quantizer(int size, std::vector< std::vector<float> >& x);
     int quantize(float x);
     std::vector<int> quantize(std::vector<float>& x);
+    std::vector< std::vector<int> > quantize(
+        std::vector< std::vector<float> >& x
+    );
     float dequantize(int xq);
     std::vector<float> dequantize(std::vector<int>& xq);
+    std::vector< std::vector<float> > dequantize(
+        std::vector< std::vector<int> >& xq
+    );
     std::string str();
     void print();
 };
