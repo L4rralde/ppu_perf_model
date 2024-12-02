@@ -28,30 +28,30 @@ Quantizer::Quantizer(){ //[-2, 2];
     get_constants(_fmin, _fmax, _qmin, _qmax, &_s, &_z);
 }
 
-Quantizer::Quantizer(int size, float fmin, float fmax){
+Quantizer::Quantizer(int nbits, float fmin, float fmax){
     _default = false;
-    _size = size;
-    _qmax = (1 << (8*size)) - 1;
+    _size = nbits;
+    _qmax = (1 << nbits) - 1;
     _qmin = -_qmax;
     _fmin = fmin;
     _fmax = fmax;
     get_constants(_fmin, _fmax, _qmin, _qmax, &_s, &_z);
 }
 
-Quantizer::Quantizer(int size, std::vector<float>& x){
+Quantizer::Quantizer(int nbits, std::vector<float>& x){
     _default = false;
-    _size = size;
-    _qmax = (1 << (8*size)) - 1;
+    _size = nbits;
+    _qmax = (1 << nbits) - 1;
     _qmin = -_qmin;
     _fmax = *std::max_element(x.begin(), x.end());
     _fmin = *std::min_element(x.begin(), x.end());
     get_constants(_fmin, _fmax, _qmin, _qmax, &_s, &_z);
 }
 
-Quantizer::Quantizer(int size, std::vector< std::vector<float> >& x){
+Quantizer::Quantizer(int nbits, std::vector< std::vector<float> >& x){
     _default = false;
-    _size = size;
-    _qmax = (1 << (8*size)) - 1;
+    _size = nbits;
+    _qmax = (1 << nbits) - 1;
     _qmin = -_qmin;
     int nrows = x.size();
 

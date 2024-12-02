@@ -31,6 +31,4 @@ public:
     void print();
 };
 
-
-
 #endif
