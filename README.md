@@ -5,3 +5,6 @@ TODO:
 - [x] develop MLP in C++.
 - [ ] Quantization
 - [ ] Testing
+
+save quantized weights in binary file.
+Analyze accuracy, time, and storage using different sizes
