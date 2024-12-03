@@ -42,7 +42,7 @@ Quantizer::Quantizer(int nbits, std::vector<float>& x){
     _default = false;
     _size = nbits;
     _qmax = (1 << (nbits - 1)) - 1;
-    _qmin = -_qmin;
+    _qmin = -_qmax;
     _fmax = *std::max_element(x.begin(), x.end());
     _fmin = *std::min_element(x.begin(), x.end());
     get_constants(_fmin, _fmax, _qmin, _qmax, &_s, &_z);
@@ -52,7 +52,7 @@ Quantizer::Quantizer(int nbits, std::vector< std::vector<float> >& x){
     _default = false;
     _size = nbits;
     _qmax = (1 << (nbits - 1)) - 1;
-    _qmin = -_qmin;
+    _qmin = -_qmax;
     int nrows = x.size();
 
     _fmax = *std::max_element(x[0].begin(), x[0].end());
