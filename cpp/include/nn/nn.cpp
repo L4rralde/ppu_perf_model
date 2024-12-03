@@ -1,4 +1,5 @@
 #include "nn.h"
+#include "../wquant/wquant.h"
 #include <iostream>
 #include <stdexcept>
 #include <fstream>
@@ -73,6 +74,12 @@ std::vector<std::string> get_model_files(std::string& fpath){
 }
 
 Perceptron::Perceptron(std::string& fpath): _depth(0){
+    std::vector<Quantizer> qs{
+        Quantizer(8, -0.21828389167785644531, 0.22750344872474670410),
+        Quantizer(8, -0.28965741395950317383, 0.37081623077392578125),
+        Quantizer(8, -0.25820058584213256836, 0.42827829718589782715),
+        Quantizer(8, -0.28323006629943847656, 0.25655370950698852539)
+    };
     std::cout << "Loading weights for inferecne." << std::endl;
     std::vector<std::vector<std::vector<float>>> weights;
     
@@ -81,7 +88,20 @@ Perceptron::Perceptron(std::string& fpath): _depth(0){
     for(int i = 0; i < nlayers; ++i){
         std::cout << "Loading layer " << i+1 << "/" << nlayers << std::endl;
         std::vector<std::vector<float>> layer_ws = read_weights_vector(model_files[i]);
-        _layers.push_back(Layer(layer_ws));
+        std::vector<std::vector<int>> quantized = qs[i].quantize(layer_ws);
+        std::vector<std::vector<float>> dequantized = qs[i].dequantize(quantized);
+        _layers.push_back(Layer(dequantized));
+        _depth++;
+    }
+    _layers[nlayers - 1].as_output_layer();
+}
+
+Perceptron::Perceptron(
+    std::vector<std::vector<std::vector<float>>>& weights
+): _depth{0}{
+    int nlayers = weights.size();
+    for(int i = 0; i < nlayers; ++i){
+        _layers.push_back(Layer(weights[i]));
         _depth++;
     }
     _layers[nlayers - 1].as_output_layer();
@@ -129,4 +149,20 @@ int argmax(vec& output){
         }
     }
     return max_i;
+}
+
+float mse(
+    std::vector< std::vector<float> >& x,
+    std::vector< std::vector<float> >& y
+){
+    int rows = x.size();
+    int cols = x[0].size();
+    float acc_err = 0;
+    for(int i = 0; i < rows; ++i){
+        for(int j = 0; j < cols; ++j){
+            float err = x[i][j] - y[i][j];
+            acc_err += err * err;
+        }
+    }
+    return acc_err/(rows * cols);
 }

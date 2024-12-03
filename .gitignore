@@ -8,3 +8,4 @@ models
 .vscode
 *.txt
 *.logs
+*.output
