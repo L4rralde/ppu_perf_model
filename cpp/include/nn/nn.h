@@ -43,4 +43,5 @@ std::vector< std::vector<float> > read_weights_vector(std::string& filename);
 
 int argmax(vec& output);
 
+std::vector<std::string> get_model_files(std::string& fpath);
 #endif
