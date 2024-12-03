@@ -96,6 +96,17 @@ Perceptron::Perceptron(std::string& fpath): _depth(0){
     _layers[nlayers - 1].as_output_layer();
 }
 
+Perceptron::Perceptron(
+    std::vector<std::vector<std::vector<float>>>& weights
+): _depth{0}{
+    int nlayers = weights.size();
+    for(int i = 0; i < nlayers; ++i){
+        _layers.push_back(Layer(weights[i]));
+        _depth++;
+    }
+    _layers[nlayers - 1].as_output_layer();
+}
+
 vec Perceptron::forward(vec& x){
     for(int i = 0; i < _depth; ++i)
         x = _layers[i].forward(x);
@@ -138,4 +149,20 @@ int argmax(vec& output){
         }
     }
     return max_i;
+}
+
+float mse(
+    std::vector< std::vector<float> >& x,
+    std::vector< std::vector<float> >& y
+){
+    int rows = x.size();
+    int cols = x[0].size();
+    float acc_err = 0;
+    for(int i = 0; i < rows; ++i){
+        for(int j = 0; j < cols; ++j){
+            float err = x[i][j] - y[i][j];
+            acc_err += err * err;
+        }
+    }
+    return acc_err/(rows * cols);
 }

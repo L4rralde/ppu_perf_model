@@ -6,19 +6,6 @@
 
 using namespace std;
 
-float mse(vector< vector<float> >& x, vector< vector<float> >& y){
-    int rows = x.size();
-    int cols = x[0].size();
-    float acc_err = 0;
-    for(int i = 0; i < rows; ++i){
-        for(int j = 0; j < cols; ++j){
-            float err = x[i][j] - y[i][j];
-            acc_err += err * err;
-        }
-    }
-    return acc_err/(rows * cols);
-}
-
 int main(int argc, char **argv){
     if(argc < 2)
         return 0;
