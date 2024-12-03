@@ -3,7 +3,7 @@
 TODO:
 - [X] Build and train model
 - [x] develop MLP in C++.
-- [ ] Quantization
+- [x] Quantization
 - [ ] Testing
 
 save quantized weights in binary file.
