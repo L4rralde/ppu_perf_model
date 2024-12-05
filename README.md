@@ -11,6 +11,8 @@ Analyze accuracy, time, and storage using different sizes
 
 ## How to use
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/L4rralde/ppu_perf_model/HEAD?labpath=main.ipynb)
+
 I don't know how to build this project on Windows machines. If you don't have access to an unix-based system, I recommend to use binder and open
 a terminal on it.
 
