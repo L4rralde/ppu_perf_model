@@ -2,6 +2,7 @@
 // Author: Emmanuel A. Larralde Ortiz | ealarralde@gmail.com
 #include <iostream>
 #include <vector>
+#include <cstdint>
 #include "../include/binfiles/binfiles.h"
 
 using namespace std;

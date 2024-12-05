@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
+#include <cstdint>
 #include "../include/nn/nn.h"
 #include "../include/wquant/wquant.h"
 #include "../include/binfiles/binfiles.h"
