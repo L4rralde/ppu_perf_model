@@ -28,3 +28,14 @@ g++ --std=c++11 cpp/include/*/*.cpp cpp/src/main.cpp -o cpp/output/main.o
 ```sh
 g++ --std=c++11 cpp/include/*/*.cpp cpp/src/int8_model.cpp -o cpp/output/int8_model.o
 ```
+
+
+### Run from terminal
+
+```sh
+./cpp/output/main.o data/pgm/001_Positive.pgm
+```
+
+```sh
+./cpp/output/int8_model.o data/pgm/001_Positive.pgm
+```
