@@ -3,9 +3,10 @@
 .ipynb_checkpoints/
 Untitled*.ipynb
 __pycache__
-models
+*.pth
 *.o
 .vscode
 *.txt
 *.logs
 *.output
+*.pdf
