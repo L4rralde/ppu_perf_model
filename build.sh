@@ -3,7 +3,7 @@ $GIT_ROOT/data/get_data.sh
 $GIT_ROOT/cpp/get_model_files.sh
 
 # Mkdir output dir if does not exist.
-if [[ -d "${GIT_ROOT}/cpp/output" ]]; then
+if [[ ! -d "${GIT_ROOT}/cpp/output" ]]; then
     mkdir ${GIT_ROOT}/cpp/output
 fi
 
