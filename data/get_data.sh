@@ -16,7 +16,7 @@ fi
 mkdir -p "${GIT_ROOT}/data"
 
 # Download the zip file
-ZIP_URL="http://personal.cimat.mx:8181/~ivan.cruz/Databases/Stenosis608.zip"
+ZIP_URL="https://l4rralde.github.io/stenosis/Stenosis608.zip"
 ZIP_FILE="${GIT_ROOT}/data/Stenosis608.zip"
 
 if ! wget -O "$ZIP_FILE" "$ZIP_URL"; then
