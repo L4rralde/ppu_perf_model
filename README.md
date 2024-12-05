@@ -4,7 +4,6 @@ TODO:
 - [X] Build and train model
 - [x] develop MLP in C++.
 - [x] Quantization
-- [ ] Testing
 
 save quantized weights in binary file.
 Analyze accuracy, time, and storage using different sizes
@@ -16,27 +15,27 @@ Analyze accuracy, time, and storage using different sizes
 I don't know how to build this project on Windows machines. If you don't have access to an unix-based system, I recommend to use binder and open
 a terminal on it.
 
+### Build from terminal
 
-### Initial setup
+#### No quantization
 
 ```sh
-source setup.sh #Only the first time
+g++ --std=c++11 cpp/include/*/*.cpp cpp/src/main.cpp -o cpp/output/main.o
 ```
 
-### Build
+#### 8 bits quantization
 
 ```sh
-source build.sh
+g++ --std=c++11 cpp/include/*/*.cpp cpp/src/int8_model.cpp -o cpp/output/int8_model.o
 ```
 
-### Test
+
+### Run from terminal
 
 ```sh
-source test.sh
+./cpp/output/main.o data/pgm/001_Positive.pgm
 ```
 
-### Fast Int8 model
-
 ```sh
-./cpp/output/int8_model.o data/pgm/*.pgm
+./cpp/output/int8_model.o data/pgm/001_Positive.pgm
 ```
