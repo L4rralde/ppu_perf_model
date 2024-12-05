@@ -1,3 +1,6 @@
+//Class to dump data into binary files.
+//Author: Emmanuel A. Larralde Ortiz | ealarralde@gmail.com
+
 #ifndef BINFILES_H
 #define BINFILES_H
 
@@ -7,7 +10,7 @@
 
 class binfile{
 public:
-    binfile() = delete; // Prevent instantiation
+    binfile() = delete; // Prevent instantiation. Static class
     ~binfile() = delete;
     static std::vector<uint8_t> read_bytes(std::string& fpath);
     static void write_bytes(

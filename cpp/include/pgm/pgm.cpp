@@ -1,3 +1,6 @@
+// Fucntions to load and procees pgm images.
+// Author: Emmanuel A. Larralde Ortiz | ealarralde@gmail.com
+
 #include <iostream>
 #include <stdexcept>
 #include "pgm.h"

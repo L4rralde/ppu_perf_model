@@ -1,3 +1,6 @@
+// Runs model with no quantization
+// Author: Emmanuel A. Larralde Ortiz | ealarralde@gmail.com
+
 #include <iostream>
 #include <vector>
 #include "../include/pgm/pgm.h"

@@ -1,3 +1,6 @@
+// Checks if data == dequantize(quantize(data))
+// Author: Emmanuel Larralde Ortiz | ealarralde@gmail.com
+
 #include <iostream>
 #include <vector>
 #include <string>

@@ -1,3 +1,6 @@
+// Code for build Multilayer Perceptrons
+// Author: Emmanuel A. Larralde Ortiz | ealarralde.gmail.com
+
 #ifndef NN_H
 #define NN_H
 

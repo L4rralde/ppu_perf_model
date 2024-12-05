@@ -1,3 +1,6 @@
+// Code to test the perceptron for stenosis classification without quantization
+// Author: Emmanuel A. Larralde Ortiz | ealarralde@gmail.com
+
 #include <iostream>
 #include <vector>
 #include "../include/pgm/pgm.h"
@@ -42,6 +45,7 @@ int main(int argc, char **argv){
 
     float accuracy = hits/(argc - 1.0);
     cout << "Accuracy:" << accuracy << endl;
+    //If accuracy < 0.95, raise an Error.
     if(accuracy < 0.95){
         throw runtime_error("ERROR. Drop of accuracy");
     }else{

@@ -1,3 +1,6 @@
+// Class to implement special-purpose arithmetic.
+// Author: Emmanuel A. Larralde Ortiz | ealarralde@cimat.mx
+
 #include "dtype.h"
 #include <iostream>
 

@@ -1,3 +1,6 @@
+// Runs a profiled and int8-quantized version of the perceptron
+// Author: Emmanuel A. Larralde Ortiz.
+
 #include <iostream>
 #include <string>
 #include <stdexcept>
@@ -57,7 +60,6 @@ int main(int argc, char **argv){
     int nlayers = files.size();
     if(nlayers != static_cast<int>(qs.size()))
         throw runtime_error("ERROR: Model depth mismatch.");
-
     vector<vector<vector<float>>> weights;
     cout << "Loading model..." << endl;
     for(int layer = 0; layer < nlayers; ++layer){
@@ -66,6 +68,7 @@ int main(int argc, char **argv){
             layer_int8_qweights.begin(),
             layer_int8_qweights.end()
         );
+        //Dequantize weights
         vector<float> flat_layer_weights = qs[layer].dequantize(layer_qweights);
         vector<vector<float>> layer_weights = reshape(
             flat_layer_weights,

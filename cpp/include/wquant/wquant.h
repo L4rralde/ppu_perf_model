@@ -1,3 +1,6 @@
+// Quantizer class definition
+// Author: Emmanuel A. Larralde Ortiz | ealarralde@gmail.com
+
 #ifndef WQUANT_H
 #define WQUANT_H
 

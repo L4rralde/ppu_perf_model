@@ -1,3 +1,6 @@
+// Fucntions to load and procees pgm images.
+// Author: Emmanuel A. Larralde Ortiz | ealarralde@gmail.com
+
 #ifndef PGM_H
 #define PGM_H
 

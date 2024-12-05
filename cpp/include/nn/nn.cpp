@@ -1,3 +1,6 @@
+// Code for build Multilayer Perceptrons
+// Author: Emmanuel A. Larralde Ortiz | ealarralde.gmail.com
+
 #include "nn.h"
 #include "../wquant/wquant.h"
 #include <iostream>

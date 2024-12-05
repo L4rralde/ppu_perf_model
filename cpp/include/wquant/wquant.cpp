@@ -1,3 +1,6 @@
+// Quantizer class definition
+// Author: Emmanuel A. Larralde Ortiz | ealarralde@gmail.com
+
 #include "wquant.h"
 #include <algorithm>
 #include <iostream>
