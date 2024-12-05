@@ -38,6 +38,7 @@ private:
     int _depth;
 public:
     Perceptron(std::string& fpath);
+    Perceptron(std::string& fpath, int bits);
     Perceptron(std::vector<std::vector<std::vector<float>>>& weights);
     vec forward(vec& x);
 };

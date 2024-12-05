@@ -63,7 +63,6 @@ int main(){
         vector< vector<int> > quantized_ws = quanto.quantize(ws);
         //Flatten quantized weigths
         vector<int> flat = flatten(quantized_ws);
-        int len = flat.size();
         //Cast to int8
         vector<int8_t> qbytes(flat.begin(), flat.end());
         string binfpath = qmodel_path + to_string(i) + ".txt";

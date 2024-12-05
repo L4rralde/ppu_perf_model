@@ -18,7 +18,7 @@ int main(int argc, char **argv){
         throw runtime_error("$GIT_ROOT must be defined first");
     string s(tmp);
     string files_path = s + "/cpp/model/";
-    Perceptron model(files_path);
+    Perceptron model(files_path, 8);
 
     //Predict
     int hits = 0;
