@@ -1,6 +1,5 @@
 numpy>=1.21.0
-torch
 pillow==10.4.0
-pandas==2.2.3
+pandas>=2.0.0
 torch>=2.0.0
 torchvision>=0.15.0
