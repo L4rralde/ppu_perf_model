@@ -1,4 +1,6 @@
-
+"""
+Multi-Layer Perceptron for Stenosis images classification
+"""
 import torch
 from torch import nn
 from torch.utils.data import DataLoader, random_split
@@ -6,15 +8,18 @@ from torch.utils.data import DataLoader, random_split
 from utils import GIT_ROOT
 from dataset import Stenosis608DataSet, ToTensor
 
-device = (
+DEVICE = (
     "mps" if torch.backends.mps.is_available()
     else "cpu"
 )
 
 
-print(f"Using {device} device")
+print(f"Using {DEVICE} DEVICE")
 
 class Perceptron(nn.Module):
+    """
+    Model archite3cture classs
+    """
     def __init__(self):
         super().__init__()
         self.flatten = nn.Flatten()
@@ -27,19 +32,25 @@ class Perceptron(nn.Module):
             nn.ReLU(),
             nn.Linear(64, 2)         # Output layer
         )
-       
 
     def forward(self, x):
+        """Model's prediction"""
         x = self.flatten(x)
         return self.network(x)
 
+    def __str__(self) -> str:
+        return "Perceptron()"
+
 def train(dataloader, model, loss_fn, optimizer):
-    size = len(dataloader.dataset)
+    """
+    Trains the model given a dataloader, a loss function
+    and an optimizer.
+    """
     model.train()
-    for batch, (X, y) in enumerate(dataloader):
-        X = X.to(device)
-        y = y.to(device)
-        pred = model(X)
+    for _, (x, y) in enumerate(dataloader):
+        x = x.to(DEVICE)
+        y = y.to(DEVICE)
+        pred = model(x)
         loss = loss_fn(pred, y)
 
         loss.backward()
@@ -48,20 +59,24 @@ def train(dataloader, model, loss_fn, optimizer):
 
         #if batch % 10 == 0:
         #    loss = loss.item()
-        #    current = (batch + 1)*len(X)
+        #    current = (batch + 1)*len(x)
         #    print(f"loss: {loss} [{current:}/{size}]")
 
 def test(dataloader, model, loss_fn):
+    """
+    Assest trained model on validation/test data
+    given a loss function.
+    """
     size = len(dataloader.dataset)
     num_batches = len(dataloader)
     model.eval()
     test_loss = 0
     correct = 0
     with torch.no_grad():
-        for X, y in dataloader:
-            X = X.to(device)
-            y = y.to(device)
-            pred = model(X)
+        for x, y in dataloader:
+            x = x.to(DEVICE)
+            y = y.to(DEVICE)
+            pred = model(x)
             test_loss += loss_fn(pred, y).item()
             correct += (pred.argmax(1) == y).type(torch.float).sum().item()
     test_loss /= num_batches
@@ -72,13 +87,17 @@ def test(dataloader, model, loss_fn):
 
 
 def initialize_weights(m):
+    """Initialize the wights of a non-trained model"""
     if isinstance(m, nn.Linear):
         nn.init.xavier_uniform_(m.weight)
         nn.init.zeros_(m.bias)
 
 
 def main():
-    model = Perceptron().to(device)
+    """
+    Main script
+    """
+    model = Perceptron().to(DEVICE)
     model.apply(initialize_weights)
     loss_fn = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
@@ -105,7 +124,7 @@ def main():
         print(f"Epoch {t+1}")
         train(train_dataloader, model, loss_fn, optimizer)
         accuracy, test_loss = test(test_dataloader, model, loss_fn)
-        
+
         # Early stopping based on test loss
         if accuracy > 0.85 and test_loss < 2.0:
             model_path = f"{GIT_ROOT}/models/{accuracy}_{test_loss}.pth"

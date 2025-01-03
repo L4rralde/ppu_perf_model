@@ -1,3 +1,7 @@
+"""
+Creates a csv from pandas dataframe which links
+every image to its right class.
+"""
 import os
 import glob
 import pandas as pd
@@ -6,6 +10,9 @@ from utils import GIT_ROOT
 
 
 def main() -> None:
+    """
+    Main function of the script.
+    """
     imgs_path = sorted(glob.glob(f"{GIT_ROOT}/data/pgm/*.pgm"))
     data = {
         "image_name": [os.path.basename(fpath) for fpath in imgs_path],

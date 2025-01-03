@@ -1,4 +1,6 @@
-
+"""
+Interfaces the StenosisDataset to Pytorch's DataSet object
+"""
 import os
 
 import torch
@@ -6,9 +8,12 @@ import pandas as pd
 import numpy as np
 from torch.utils.data import Dataset
 
-from utils import GIT_ROOT, read_pgm
+from utils import read_pgm
 
 class Stenosis608DataSet(Dataset):
+    """
+    StenosisDataset in Pytorch format
+    """
     def __init__(self, annotation_file: str, img_dir: str, transform: object = None):
         self.img_label = pd.read_csv(annotation_file)
         self.img_dir = img_dir
@@ -31,7 +36,13 @@ class Stenosis608DataSet(Dataset):
             image = self.transform(image)
         return (image, label)
 
-class ToTensor(object):
+class ToTensor():
+    """
+    Built-in transform for torch.vision
+    """
     def __call__(self, image: np.ndarray) -> torch.Tensor:
         image = torch.from_numpy(image).unsqueeze(0)  # Shape: (1, H, W)
         return image
+
+    def __repr__(self) -> str:
+        return "Built-in ToTensor()"
