@@ -6,7 +6,7 @@ __pycache__
 *.pth
 *.o
 .vscode
-*.txt
+#*.txt
 *.logs
 *.output
 *.pdf
